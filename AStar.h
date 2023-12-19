@@ -10,6 +10,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::vector;
+using std::find;
 
 struct Node
 {
@@ -39,6 +40,12 @@ private:
 	Node* start_; // スタート位置
 	Node* goal_; // ゴール位置
 
+
+	static const int direction_ = 8; // 隣接ノード探索範囲　８方向
+	int dx[direction_] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+	int dy[direction_] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+
+
 	vector<vector<Node*>> nodes_; // ノードの二次元配列
 	vector<Node*> openList_; // オープンリスト
 	vector<Node*> closeList_; // クローズリスト
@@ -67,7 +74,7 @@ public:
 	bool IsObstacle(int _x, int _y) const; 
 	
 	// パスを見つける
-	vector<Node*> findPath();
+	vector<Node*> FindPath();
 
 };
 
