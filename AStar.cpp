@@ -27,6 +27,15 @@ void AStar::SetObstacle(int _x, int _y)
 	}
 }
 
+void AStar::SetStart(int _x, int _y)
+{
+	// スタート位置をいれる
+	if (IsValid(_x, _y))
+	{
+		start_ = nodes_[_x][_y];
+	}
+}
+
 void AStar::SetGoal(int _x, int _y)
 {
 	if (IsValid(_x, _y))
@@ -118,7 +127,7 @@ vector<Node*> AStar::FindPath()
 				find(openList_.begin(), openList_.end(), neighbor) == openList_.end())
 			{
 				neighbor->gCost = newGCost;
-				neighbor->hCost = heuristic(neighbor, goal_);
+				neighbor->hCost = Heuristic(neighbor, goal_);
 				neighbor->parent = current;
 
 				if (find(openList_.begin(), openList_.end(), neighbor) == openList_.end())
@@ -131,4 +140,33 @@ vector<Node*> AStar::FindPath()
 	
 	// ゴールに到達できなかった場合、空のパスを返す
 	return vector<Node*>();
+}
+
+Node* AStar::GetNode(int x, int y) const
+{
+	if (IsValid(x, y))
+	{
+		//指定されたノードが範囲内なら返す
+		return nodes_[x][y];
+	}
+	
+	return nullptr;
+}
+
+void AStar::CalculateCosts(Node* node)
+{
+	if (node != nullptr)
+	{
+		//スタートノードからどれだけ離れているか
+		node->gCost = abs(node->x - start_->x) + abs(node->y - start_->y);
+		
+		//ゴールノードからどれだけ離れているか
+		node->hCost = abs(node->x - goal_->x) + abs(node->y - goal_->y);
+	}
+}
+
+int AStar::Heuristic(Node* a, Node* b) const
+{
+	//推定コスト計算
+	return abs(a->x - b->x) + abs(a->y - b->y);
 }

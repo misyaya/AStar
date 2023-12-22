@@ -11,6 +11,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::find;
+using std::abs;
 
 struct Node
 {
@@ -50,9 +51,9 @@ private:
 	vector<Node*> openList_; // オープンリスト
 	vector<Node*> closeList_; // クローズリスト
 
-	Node* getNode(int x, int y) const; // 座標のノードを取得
-	void calculateCosts(Node* node); // コストの計算
-	int heuristic(Node* a, Node* b) const; // ヒューリスティック関数
+	Node* GetNode(int x, int y) const; // 座標のノードを取得
+	void CalculateCosts(Node* node); // コストの計算
+	int Heuristic(Node* a, Node* b) const; // ヒューリスティック関数
 
 public:
 	//コンストラクタ
