@@ -24,6 +24,7 @@ void AStar::SetObstacle(int _x, int _y)
 	{
 		// nodes_には基本的に座標が入っているため nullptr->障害物ありと判定する
 		nodes_[_x][_y] = nullptr;
+		
 	}
 }
 
@@ -90,9 +91,13 @@ vector<Node*> AStar::FindPath()
 			while (current != nullptr)
 			{
 				path.push_back(current);
+				
+				// 最短経路のノード
+				current->isOnPath = true;
 
 				// currentがどこから来たのかをたどる
 				current = current->parent;
+
 			}
 			return path;
 		}
@@ -169,4 +174,30 @@ int AStar::Heuristic(Node* a, Node* b) const
 {
 	//推定コスト計算
 	return abs(a->x - b->x) + abs(a->y - b->y);
+}
+
+void AStar::PrintMap() const 
+{
+	for (int y = 0; y < height_; ++y) 
+	{
+		for (int x = 0; x < width_; ++x) 
+		{
+			if (nodes_[x][y] != nullptr) 
+			{
+				if (nodes_[x][y]->isOnPath)
+				{
+					cout << "〇 ";
+				}
+				else
+				{
+					cout << "□ ";
+				}
+			}
+			else 
+			{
+				cout << "■ ";
+			}
+		}
+		cout << endl;
+	}
 }

@@ -20,6 +20,7 @@ struct Node
 	int gCost; // 開始地点からのコスト
 	int hCost; // ゴールまでの推定コスト
 	Node* parent; // 親ノードへのポインタ
+	bool isOnPath = false; // パス上のノード
 
 	//コンストラクタ　それぞれの値の初期化
 	Node(int _x, int _y):
@@ -76,6 +77,8 @@ public:
 	
 	// パスを見つける
 	vector<Node*> FindPath();
+
+	void PrintMap() const;
 
 };
 

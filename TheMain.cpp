@@ -2,25 +2,43 @@
 
 int main()
 {
-	//マップの幅設定
+	// マップの幅設定
 	const int width = 10; 
 
-	//マップの高さ設定
+	// マップの高さ設定
 	const int height = 10;
+
+	// スタートXY座標
+	const int startX = 0;
+	const int startY = 0;
+
+	// ゴールXY座標
+	const int goalX = 9;
+	const int goalY = 9;
 
 	// インスタンス作成
 	AStar aStar(width, height);
 
 	// スタート設定
-	aStar.SetStart(0, 0);
+	aStar.SetStart(startX, startY);
 
 	// ゴール設定
 	aStar.SetGoal(9, 9);
 
+	// 乱数のシードを設定
+	srand(static_cast<unsigned>(time(nullptr)));  
+
 	// 障害物設定
-	aStar.SetObstacle(2, 2);
-	aStar.SetObstacle(3, 3);
-	aStar.SetObstacle(4, 4);
+	for(int i = 0; i < 25; i++)
+	{
+		int x = rand() % width;
+		int y = rand() % height;
+
+		if ((x != startX || y != startY) && (x != goalX || y != goalY))
+		{
+			aStar.SetObstacle(x, y);
+		}
+	}
 
 	// 経路探索
 	vector<Node*> path = aStar.FindPath();
@@ -40,6 +58,8 @@ int main()
 	{
 		cout << "Path not found!" << endl;
 	}
+
+	aStar.PrintMap();
 
 	return 0;
 
