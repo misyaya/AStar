@@ -59,6 +59,10 @@ int main()
 		cout << "Path not found!" << endl;
 	}
 
+	cout << "\n" << " :’Ê˜H  ¡:áŠQ•¨  Z:Å’ZŒo˜H" << endl;
+
+	cout << "\n" <<  "`Map`" << endl;
+
 	aStar.PrintMap();
 
 	return 0;

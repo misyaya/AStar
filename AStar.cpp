@@ -178,12 +178,14 @@ int AStar::Heuristic(Node* a, Node* b) const
 
 void AStar::PrintMap() const 
 {
+	//  :’Ê˜H  ¡:áŠQ•¨  Z:Å’ZŒo˜H
 	for (int y = 0; y < height_; ++y) 
 	{
 		for (int x = 0; x < width_; ++x) 
 		{
 			if (nodes_[x][y] != nullptr) 
 			{
+				// Å’ZŒo˜H‚¾‚Á‚½‚çZ
 				if (nodes_[x][y]->isOnPath)
 				{
 					cout << "Z ";

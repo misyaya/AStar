@@ -22,7 +22,7 @@ struct Node
 	Node* parent; // 親ノードへのポインタ
 	bool isOnPath = false; // パス上のノード
 
-	//コンストラクタ　それぞれの値の初期化
+	// コンストラクタ　それぞれの値の初期化
 	Node(int _x, int _y):
 		x(_x), y(_y), gCost(0), hCost(0), parent(nullptr){}
 	
@@ -51,10 +51,15 @@ private:
 	vector<vector<Node*>> nodes_; // ノードの二次元配列
 	vector<Node*> openList_; // オープンリスト
 	vector<Node*> closeList_; // クローズリスト
+	
+	// 座標のノードを取得
+	Node* GetNode(int x, int y) const;
 
-	Node* GetNode(int x, int y) const; // 座標のノードを取得
-	void CalculateCosts(Node* node); // コストの計算
-	int Heuristic(Node* a, Node* b) const; // ヒューリスティック関数
+	// コストの計算
+	void CalculateCosts(Node* node);
+
+	// ヒューリスティック関数
+	int Heuristic(Node* a, Node* b) const;
 
 public:
 	//コンストラクタ
@@ -78,6 +83,7 @@ public:
 	// パスを見つける
 	vector<Node*> FindPath();
 
+	// マップ表示
 	void PrintMap() const;
 
 };
